@@ -52,6 +52,11 @@ class NotificationPage{
         this.Draft_Delete_Conform_Yes = page.locator("//span[contains(text(),'Yes')]")
         this.Draft_Noti_Campaign_Name = page.locator("//div[@class='ant-card-body']/div/div/h5")
         
+        this.Conform_Publish_Yes=page.locator("//button[1]/span[contains(text(),'Yes')]")
+        this.Upcoming= page.locator("//h4[contains(text(),'Upcoming')]")
+        this.Upcoming_Campaign_Name = page.locator(`//h5[contains(text(),"${notificationData.campaignName}")]/ancestor::div[2]/div[1]`)
+        this.Upcoming_Delete = page.locator(`//h5[contains(text(),"${notificationData.campaignName}")]/ancestor::div[2]/div[2]/button[2]`)
+        this.upcoming_Delete_Conform_Yes = page.locator("//span[contains(text(),'Yes')]")
 
 
     }
@@ -135,15 +140,15 @@ class NotificationPage{
         await expect(this.New_Push_Notification).toBeChecked();
         await expect(this.New_Email_Notification).toBeChecked();
         await this.New_Publish.click();
-
+      //  await this.Conform_Publish_Yes()
       
     }
      async Delete_Draft_Notification(){
 
-       await NotificationManagement.Drafts.click()
-   const draftText = await NotificationManagement.Drafts_text.textContent()
-   expect(draftText).toBe(notificationData.campaignName)   
-      
+      const draftText = await NotificationManagement.Drafts_text.textContent()
+      expect(draftText).toBe(notificationData.campaignName)    
+      await NotificationManagement.Draft_Delete.click()
+      await NotificationManagement.Draft_Delete_Conform_Yes.click()
     }
 
 }
