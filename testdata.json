@@ -2,6 +2,7 @@
     "email" : "admin@openroadapp.us",
     "password" : "Admin@123",
     "URL" : "https://dev3-web.openroadapp.us",
+    "URL" : "https://dev3-web.openroadapp.us/login",
     "homeurl" : "https://dev3-web.openroadapp.us/Home"
 
 }
