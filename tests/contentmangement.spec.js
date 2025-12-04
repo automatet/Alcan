@@ -4,7 +4,7 @@ import testdata from '../testdata.json';
 import Content from '../pages/publishcontentmanagement.js';
 
 
-test.only('Publish New Contest', async ({page})=>{
+test('Publish New Contest', async ({page})=>{
   
     const loginuser = new LoginPage(page)
     await page.goto(testdata.URL)
