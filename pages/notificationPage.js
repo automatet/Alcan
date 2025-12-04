@@ -1,6 +1,4 @@
 import { expect } from '@playwright/test';
-import testdata from '../testdata.json'
-import testdataNotification from '../tests/notificationData.json';
 import notificationData from '../tests/notificationData.json';
 
 class NotificationPage{
@@ -8,6 +6,7 @@ class NotificationPage{
     constructor(page){
 
         this.page = page;
+        this.Home = page.locator("//span[contains(text(),'Homepage')]")
         this.Notification_Management_Tab = page.locator("//span[contains(text(),'Notification Management')]")
         this.Create_New = page.locator("//h4[contains(text(),'Create New')]")
         this.New_Campaign_Name = page.locator("//input[@id='campaignName']")
@@ -24,11 +23,11 @@ class NotificationPage{
         this.New_Mobile_Preview = page.locator("//span[contains(text(),'Mobile Preview')]")
         this.New_Save_as_Draft = page.locator("//span[contains(text(),'Save as Draft')]")
         this.New_Publish = page.locator("//span[contains(text(),'Publish')]")
-       this.New_Mobile_Preview_Campaign_Name = page.locator("//*[@id='root']/div/div/main/div[4]/div[1]/div/div[3]/div[1]/div[1]")
-       this.New_Mobile_Preview_Description = page.locator("//*[@id='root']/div/div/main/div[4]/div[1]/div/div[3]/div[2]/div")
+       this.New_Mobile_Preview_Campaign_Name = page.locator(`//div[contains(text(),"${notificationData.campaignName}")]`)
+       this.New_Mobile_Preview_Description = page.locator(`//div[@class='description-preview']/p[contains(text(),"${notificationData.description}")]`)
         
         this.Drafts = page.locator("//h4[contains(text(),'Drafts')]")
-        this.Drafts_text= page.locator("//*[@id='root']/div/div/main/div/div[1]/div[1]/div/div[2]/div[1]/div[1]/h5")
+        this.Drafts_text= page.locator(`//h5[contains(text(),"${notificationData.campaignName}")]`)
         this.Drafts_text_edit= page.locator(`//h5[contains(text(),"${notificationData.campaignName}")]/ancestor::div[2]/div[2]/button[1]`)
         this.Drafts_Campaign_Name = page.locator("//input[@id='campaignName']")
         this.Drafts_Campaign_Duration_Start_Date = page.locator("//input[@id='startDate']")
@@ -46,17 +45,18 @@ class NotificationPage{
         this.Draft_Mobile_Preview = page.locator("//span[contains(text(),'Mobile Preview')]")
         this.Draft_Save_as_Draft = page.locator("//span[contains(text(),'Save as Draft')]")
         this.Draft_Publish = page.locator("//span[contains(text(),'Publish')]")
-       // this.Draft_Delete = page.locator("//h5[contains(text(),${notificationData.campaignName})]/ancestor::div[2]/div[2]/button[2]")
         this.Draft_Delete = page.locator(`//h5[contains(text(),"${notificationData.campaignName}")]/ancestor::div[2]/div[2]/button[2]`)
         this.Draft_View = page.locator(`//h5[contains(text(),"${notificationData.campaignName}")]/ancestor::div[2]/div[2]/button[3]`)
         this.Draft_Delete_Conform_Yes = page.locator("//span[contains(text(),'Yes')]")
         this.Draft_Noti_Campaign_Name = page.locator("//div[@class='ant-card-body']/div/div/h5")
         
-        this.Conform_Publish_Yes=page.locator("//button[1]/span[contains(text(),'Yes')]")
+       
+        this.Conform_Publish_Yes=page.getByRole('dialog').getByRole('button', { name: 'Yes' })
         this.Upcoming= page.locator("//h4[contains(text(),'Upcoming')]")
+        this.Upcoming_text= page.locator(`//h5[contains(text(),"${notificationData.campaignName}")]`)
         this.Upcoming_Campaign_Name = page.locator(`//h5[contains(text(),"${notificationData.campaignName}")]/ancestor::div[2]/div[1]`)
         this.Upcoming_Delete = page.locator(`//h5[contains(text(),"${notificationData.campaignName}")]/ancestor::div[2]/div[2]/button[2]`)
-        this.upcoming_Delete_Conform_Yes = page.locator("//span[contains(text(),'Yes')]")
+        this.Upcoming_Delete_Conform_Yes = page.locator("//span[contains(text(),'Yes')]")
 
 
     }
@@ -140,17 +140,51 @@ class NotificationPage{
         await expect(this.New_Push_Notification).toBeChecked();
         await expect(this.New_Email_Notification).toBeChecked();
         await this.New_Publish.click();
-      //  await this.Conform_Publish_Yes()
+      // await this.Conform_Publish_Yes.click();
       
     }
      async Delete_Draft_Notification(){
 
-      const draftText = await NotificationManagement.Drafts_text.textContent()
+      const draftText = await this.Drafts_text.textContent()
       expect(draftText).toBe(notificationData.campaignName)    
-      await NotificationManagement.Draft_Delete.click()
-      await NotificationManagement.Draft_Delete_Conform_Yes.click()
+      await this.Draft_Delete.click()
+      await this.Draft_Delete_Conform_Yes.click()
+    }
+ async To_Create_Uniqe(){
+
+   await this.Notification_Management_Tab.click()
+   await this.Drafts.click()
+   
+if(await this.Drafts_text.isVisible()){
+   await this.Delete_Draft_Notification()
+}
+    else
+{
+   await this.Notification_Management_Tab.click()
+  
+}  
+    }
+
+
+async To_Create_Uniqe1(){
+
+await this.Notification_Management_Tab.click()
+await this.Upcoming.click()
+   
+if(await this.Upcoming_text.isVisible()){
+   const UpcomingText = await this.Upcoming_text.textContent()
+      expect(UpcomingText).toBe(notificationData.campaignName)    
+      await this.Upcoming_Delete.click()
+      await this.Upcoming_Delete_Conform_Yes.click()
+}
+    else
+{
+   await this.Notification_Management_Tab.click()
+  
+}  
     }
 
 }
+
 
 export default NotificationPage;
