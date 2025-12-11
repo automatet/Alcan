@@ -47,7 +47,6 @@ class RearrangeList{
         this.selectRoute = page.locator("//span[@title='Select a route']")
         this.Route = (value) =>page.locator(".ant-select-item-option-content", { hasText: value });
         this.image = page.locator("//div[@class='ant-card-body']/img")
-        //this.NoPOIvalidationTrip = page.locator("//span[normalize-space()='No Trip POIs found for the selected route.']")
         this.mobile_previewTrip = page.locator("//span[normalize-space()='Mobile Preview']")
         this.mobile_closeTrip = page.locator("//span[normalize-space()='Close Preview']")
  
