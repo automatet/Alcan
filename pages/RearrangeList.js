@@ -1,11 +1,6 @@
 import { expect } from '@playwright/test';
 import Rearrangedata from '../Rearrangedata.json'
 
-
-
-
-
- 
 class RearrangeList{
     constructor(page){
  
@@ -40,11 +35,7 @@ class RearrangeList{
         this.citySelect = (value) =>page.locator(".ant-select-item-option-content", { hasText: value });
         this.image = page.locator("//div[@class='ant-card-body']/img")
         this.NoPOIvalidation = page.locator("//span[normalize-space()='No POIs found for the selected city.']")
- 
-       
-       
-        //****************REARRANGE TRIP POI*****/
- 
+       //****************REARRANGE TRIP POI*****/
         this.Rearrange_tab = page.locator("//span[contains(text(),'Rearrange Lists')]")
         this.Rearrange_TripPOI = page.locator("//span[contains(text(),'Rearrange Trip POIs')]")
         this.selectTripPOI = page.locator("//span[contains(text(),'Select Direction')]")
@@ -56,12 +47,11 @@ class RearrangeList{
         this.selectRoute = page.locator("//span[@title='Select a route']")
         this.Route = (value) =>page.locator(".ant-select-item-option-content", { hasText: value });
         this.image = page.locator("//div[@class='ant-card-body']/img")
-        this.NoPOIvalidationTrip = page.locator("//span[normalize-space()='No Trip POIs found for the selected route.']")
+        //this.NoPOIvalidationTrip = page.locator("//span[normalize-space()='No Trip POIs found for the selected route.']")
         this.mobile_previewTrip = page.locator("//span[normalize-space()='Mobile Preview']")
         this.mobile_closeTrip = page.locator("//span[normalize-space()='Close Preview']")
  
     }
- 
        async rearrangeCity()
        {
          await this.Rearrange_tab.click()
@@ -76,8 +66,7 @@ class RearrangeList{
          await this.yessbtn.click()
          
        }
- 
-         async RearrangePOI()
+          async RearrangePOI()
          {
             await this.Rearrange_tab.click()
             await this.Rearrange_POI.click()
@@ -151,10 +140,7 @@ class RearrangeList{
 
          }
 
-
-
- 
- 
-        }
+         
+}
  
 export default RearrangeList;
