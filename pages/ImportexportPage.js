@@ -1,6 +1,6 @@
 import data from '../testdata.json'
 import { expect } from '@playwright/test';
-import testdataImportexport from '../testdataimportexport.json';
+import testdataImportexport from '../testdataImportexport.json';
 import test from 'node:test';
 
 

@@ -2,7 +2,7 @@ import{test,expect} from '@playwright/test';
 import LoginPage from '../pages/loginPage.js';
 import ImportexportPage from '../pages/ImportexportPage.js';
 import testdata from '../testdata.json';
-import testdataImportexport from '../testdataimportexport.json';
+import testdataImportexport from '../testdataImportexport.json';
 
 test('data import and export positive flow', async ({page})=>{
 
