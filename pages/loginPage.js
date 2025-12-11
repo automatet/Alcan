@@ -1,4 +1,3 @@
-import { TIMEOUT } from 'dns';
 import testdata from '../testdata.json'
 
 class LoginPage{
