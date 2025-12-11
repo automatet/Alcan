@@ -1,0 +1,10 @@
+{
+    "exportURL" : "https://dev3-web.openroadapp.us/data-export-page",
+    "importURL" : "https://dev3-web.openroadapp.us/data-import-page",
+    "cityoverwriteFile" : "data/Cityimport_Overwrite.xlsx",
+    "cityappendFile" : "data/Cityimport_Append.xlsx",
+    "poioverwriteFile" : "data/POIImport_Overwrite.xlsx",
+    "poiappendFile" : "data/POIImport_Append.xlsx",
+    "trippoioverwriteFile" : "data/TripPoi_Overwrite.xlsx",
+    "trippoiappend" : "data/TripPoi_Append.xlsx"
+}
