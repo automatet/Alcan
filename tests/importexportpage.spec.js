@@ -2,9 +2,9 @@ import{test,expect} from '@playwright/test';
 import LoginPage from '../pages/loginPage.js';
 import ImportexportPage from '../pages/ImportexportPage.js';
 import testdata from '../testdata.json';
-//import testdataimportexport.json from '../testdataimportexport'
+import testdataImportexport from '../testdataimportexport.json';
 
-test('dataimportexport', async ({page})=>{
+test('data import and export positive flow', async ({page})=>{
 
     test.setTimeout(120000);
   
@@ -13,22 +13,60 @@ test('dataimportexport', async ({page})=>{
     await page.goto(testdata.URL)
     await loginuser.login()
 
-    //dataexport function call and assertions
-    const dataexport = new ImportexportPage(page)
-    await dataexport.export()
+    //dataexportcity function call and assertions
+    const dataexportcity = new ImportexportPage(page)
+    await dataexportcity.exportcity()
     await expect(page).toHaveTitle('Open Road');
-    await expect(page).toHaveURL('https://dev3-web.openroadapp.us/data-export-page');
-    await expect(page.locator('//p[text() = "Click on download to export files"]')).toContainText('Click on download to export files');  
+    await expect(page).toHaveURL(testdataImportexport.exportURL);
 
-    //dataimport function call and assertions
-    const dataimport = new ImportexportPage(page)
-    await dataimport.import()
+    //dataexportpoi function call and assertions
+    const dataexportpoi = new ImportexportPage(page)
+    await dataexportpoi.exportpoi()
     await expect(page).toHaveTitle('Open Road');
-    await expect(page).toHaveURL('https://dev3-web.openroadapp.us/data-import-page');
-    await expect.soft(page.locator('//p[text() = "Click on upload to import files"]')).toContainText('Click on upload to import files');
-   
+    await expect(page).toHaveURL(testdataImportexport.exportURL);
+    await expect(page.locator('//p[text() = "Click on download to export files"]')).toContainText('Click on download to export files');
 
-   
+    //dataexportpoi function call and assertions
+    const dataexporttrippoi = new ImportexportPage(page)
+    await dataexporttrippoi.exporttrippoi()
+    await expect(page).toHaveTitle('Open Road');
+    await expect(page).toHaveURL(testdataImportexport.exportURL);
+    await expect(page.locator('//p[text() = "Click on download to export files"]')).toContainText('Click on download to export files');
 
+    //dataimportcityoverwrite function call and assertions
+    const dataimportcityoverwrite = new ImportexportPage(page)
+    await dataimportcityoverwrite.importcityoverwrite()
+    await expect(page).toHaveTitle('Open Road');
+    await expect(page).toHaveURL(testdataImportexport.importURL);
+
+    //dataimportcityappend function call and assertions
+    const dataimportcityappend = new ImportexportPage(page)
+    await dataimportcityappend.importcityappend()
+    await expect(page).toHaveTitle('Open Road');
+    await expect(page).toHaveURL(testdataImportexport.importURL);
+
+    //dataimportpoioverwrite function call and assertions
+    const dataimportpoioverwrite = new ImportexportPage(page)
+    await dataimportpoioverwrite.importpoioverwrite()
+    await expect(page).toHaveTitle('Open Road');
+    await expect(page).toHaveURL(testdataImportexport.importURL);
+
+    //dataimportpoiappend function call and assertions
+    const dataimportpoiappend = new ImportexportPage(page)
+    await dataimportpoiappend.importpoiappend()
+    await expect(page).toHaveTitle('Open Road');
+    await expect(page).toHaveURL(testdataImportexport.importURL);
+
+    //dataimporttrippoioverwrite function call and assertions
+    const dataimporttrippoioverwrite = new ImportexportPage(page)
+    await dataimporttrippoioverwrite.importtrippoioverwrite()
+    await expect(page).toHaveTitle('Open Road');
+    await expect(page).toHaveURL(testdataImportexport.importURL);
+
+    //dataimporttrippoiappend function call and assertions
+    const dataimporttrippoiappend = new ImportexportPage(page)
+    await dataimporttrippoiappend.importtrippoiappend()
+    await expect(page).toHaveTitle('Open Road');
+    await expect(page).toHaveURL(testdataImportexport.importURL);
+    
 })
-

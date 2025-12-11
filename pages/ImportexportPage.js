@@ -1,5 +1,8 @@
 import data from '../testdata.json'
 import { expect } from '@playwright/test';
+import testdataImportexport from '../testdataimportexport.json';
+import test from 'node:test';
+
 
 
 class ImportexportPage{
@@ -18,7 +21,7 @@ class ImportexportPage{
         this.downloadexcelbutton = page.locator('//span[text()= "Download Excel"]');
         this.downloadcancelbutton = page.locator('//button[text()= "Cancel"]');
         this.downloadconfirmbutton = page.locator('//button[text()= "Download"]');
-        this.verifyexportcitysuccess = page.locator('//div[contains(text(),"Downloaded successfully")]');
+        this.verifyexportcitysuccess = page.locator('//span[contains(text(),"city Downloaded successfully")]');
 
         //exportpoilocators
         this.exportpoibutton = page.locator('//button[text() ="Export POI"]');
@@ -59,62 +62,69 @@ class ImportexportPage{
     }
 
 
+    async exportcity(){
 
-
-    async export(){
-
-        //exportcity
         await this.ImportexportTab.click();
         await this.exportbutton.click();
         await this.exportcitybutton.click();
         await this.regiondropdown.selectOption("India");
-        const fileexport = await this.downloadexcelbutton.click();
+        await this.downloadexcelbutton.click();
         await this.downloadconfirmbutton.click();
+
+    }
+
+    async exportpoi(){
              
-        //exportpoi
         await this.exportpoibutton.click();
         await this.regiondropdown.selectOption("India");
         await this.citydropdown.selectOption("Pune");
-        await fileexport;
+        await this.downloadexcelbutton.click();
+        await this.downloadconfirmbutton.click();       
 
-        //exporttrippoi
+    }
+
+    async exporttrippoi(){
+
         await this.exporttrippoibutton.click();
         await this.selectdirectiondropdown.selectOption("Northwest");
         await this.selecttripdropdown.selectOption("India trip");
-        await fileexport;
-        
-    
+        await this.downloadexcelbutton.click();
+        await this.downloadconfirmbutton.click();
+
     }
 
-    async import(){
+    async importcityoverwrite(){
 
-       //importcityoverwrite
         await this.ImportexportTab.click();
         await this.importbutton.click();
         await this.importcitybutton.click();
         await this.regiondropdown.selectOption("India");
-        await this.fileinput.setInputFiles("C:/Users/abhishek.hiremath/Alcan/data/Cityimport_Overwrite.xlsx");
+        await this.fileinput.setInputFiles(testdataImportexport.cityoverwriteFile);
         await this.exportbackupconfirmbutton.click();
         await this.uploadconfirmbutton.click();
         await this.overwritebutton.click();
         await this.confrimbutton.click();
         await this.page.waitForSelector('//button[text() = "Confirm"]',{ state: 'detached'});
         await this.page.waitForSelector('//h2[text()="Select the action to Overwrite or Append File"]', { state: 'detached' });
+    
+    }
 
+    async importcityappend(){
 
-        //importcityappend
         await this.importbutton.click();
         await this.regiondropdown.selectOption("India");
-        await this.fileinput.setInputFiles("C:/Users/abhishek.hiremath/Alcan/data/Cityimport_Append.xlsx");
+        await this.fileinput.setInputFiles(testdataImportexport.cityappendFile);
         await this.exportbackupconfirmbutton.click();
         await this.uploadconfirmbutton.click();
         await this.appendbutton.click();
         await this.confrimbutton.click();
         await this.page.waitForSelector('//button[text() = "Confirm"]',{ state: 'detached'}); 
         await this.page.waitForSelector('//h2[text()="Select the action to Overwrite or Append File"]', { state: 'detached' });
-        
 
-        //importpoioverwrite;
+    }
+
+    async importpoioverwrite(){
+        
         await this.importbutton.click();
         await this.page.waitForTimeout(1000);
         await this.importpoibutton.click();
@@ -129,25 +139,27 @@ class ImportexportPage{
         
         await this.uploadexcelbutton.waitFor({ state: 'attached' });
         
-        await this.fileinput.setInputFiles("C:/Users/abhishek.hiremath/Alcan/data/POIImport_Overwrite.xlsx");
+        await this.fileinput.setInputFiles(testdataImportexport.poioverwriteFile);
         await this.exportbackupconfirmbutton.click();
         await this.uploadconfirmbutton.click();
         await this.overwritebutton.click();
         await this.confrimbutton.click();
         await this.page.waitForSelector('//button[text() = "Confirm"]',{ state: 'detached'});
         await this.page.waitForSelector('//h2[text()="Select the action to Overwrite or Append File"]', { state: 'detached' });
-        
 
-        //importpoiappend
+    }
+
+    async importpoiappend(){
+        
         await this.importbutton.click();
         await this.page.waitForTimeout(1000);
         await this.importpoibutton.click();
         await this.page.waitForTimeout(1000);
         await this.regiondropdown.selectOption("India");
-        await responsePromise;
+        await this.importpoioverwrite.responsePromise;
         await this.citydropdown.selectOption({ label: "Gujarat" });
         await this.uploadexcelbutton.waitFor({ state: 'attached' });
-        await this.fileinput.setInputFiles("C:/Users/abhishek.hiremath/Alcan/data/POIImport_Append.xlsx");
+        await this.fileinput.setInputFiles(testdataImportexport.poiappendFile);
         await this.exportbackupconfirmbutton.click();
         await this.page.waitForSelector('//button[contains(., "Upload")]', {state: 'visible',timeout: 20000});
         await this.uploadconfirmbutton.click();
@@ -155,10 +167,11 @@ class ImportexportPage{
         await this.confrimbutton.click();
         await this.page.waitForSelector('//button[text() = "Confirm"]',{ state: 'detached'}); 
         await this.page.waitForSelector('//h2[text()="Select the action to Overwrite or Append File"]', { state: 'detached' });
-        
-    
 
-        //importtrippoioverwrite
+    }
+
+    async importtrippoioverwrite(){
+
         await this.importbutton.click();
         await this.page.waitForTimeout(1000);
         await this.importtrippoibutton.click();
@@ -167,7 +180,7 @@ class ImportexportPage{
         await this.selectdirectiondropdown.selectOption("Northwest");
         const response2 = await responsepromise2
         await this.selecttripdropdown.selectOption("India trip");
-        await this.fileinput.setInputFiles("C:/Users/abhishek.hiremath/Alcan/data/TripPoi_Overwrite.xlsx");
+        await this.fileinput.setInputFiles(testdataImportexport.trippoioverwriteFile);
         await this.exportbackupconfirmbutton.click();
         await this.uploadconfirmbutton.click();
         await this.overwritebutton.click();
@@ -175,15 +188,16 @@ class ImportexportPage{
         await this.page.waitForSelector('//button[text() = "Confirm"]',{ state: 'detached'});
         await this.page.waitForSelector('//h2[text()="Select the action to Overwrite or Append File"]', { state: 'detached' });
         
+    }
 
-        //importtrippoiappend
-        await this.page.pause();
+    async importtrippoiappend(){
+
         await this.importbutton.click();
         await this.importtrippoibutton.click();
         await this.selectdirectiondropdown.selectOption("Northwest");
-        await responsepromise2;
+        await this.importtrippoioverwrite.responsepromise2;
         await this.selecttripdropdown.selectOption("India trip");
-        await this.fileinput.setInputFiles("C:/Users/abhishek.hiremath/Alcan/data/TripPoi_Append.xlsx");
+        await this.fileinput.setInputFiles(testdataImportexport.trippoiappend);
         await this.page.waitForTimeout(1000);
         await this.page.waitForSelector('//button[@class = "export-button" and text() = "Export Now"]', { state: 'visible'});
         await this.exportbackupconfirmbutton.click();
@@ -191,10 +205,9 @@ class ImportexportPage{
         await this.uploadconfirmbutton.click();
         await this.appendbutton.click();
         await this.confrimbutton.click();
-        await this.page.waitForSelector('//button[text() = "Confirm"]',{ state: 'detached'}); 
+        //await this.page.waitForSelector('//button[text() = "Confirm"]',{ state: 'detached'}); 
         await this.page.waitForSelector('//h2[text()="Select the action to Overwrite or Append File"]', { state: 'detached' });
         
-    
     }
 }
 
