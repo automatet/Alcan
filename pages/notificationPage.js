@@ -23,8 +23,8 @@ class NotificationPage{
         this.New_Mobile_Preview = page.locator("//span[contains(text(),'Mobile Preview')]")
         this.New_Save_as_Draft = page.locator("//span[contains(text(),'Save as Draft')]")
         this.New_Publish = page.locator("//span[contains(text(),'Publish')]")
-       this.New_Mobile_Preview_Campaign_Name = page.locator(`//div[contains(text(),"${notificationData.campaignName}")]`)
-       this.New_Mobile_Preview_Description = page.locator(`//div[@class='description-preview']/p[contains(text(),"${notificationData.description}")]`)
+        this.New_Mobile_Preview_Campaign_Name = page.locator(`//div[contains(text(),"${notificationData.campaignName}")]`)
+        this.New_Mobile_Preview_Description = page.locator(`//div[@class='description-preview']/p[contains(text(),"${notificationData.description}")]`)
         
         this.Drafts = page.locator("//h4[contains(text(),'Drafts')]")
         this.Drafts_text= page.locator(`//h5[contains(text(),"${notificationData.campaignName}")]`)
@@ -106,7 +106,7 @@ class NotificationPage{
         await this.New_In_App_Notification.check()
         await this.New_Push_Notification.check()
         await this.New_Email_Notification.check()
-         await this.New_email_Text.fill(notificationData.emailText)
+        await this.New_email_Text.fill(notificationData.emailText)
         await this.New_email_Subject.fill(notificationData.emailSubject)
         
         await this.New_Title.fill(notificationData.title)
@@ -130,7 +130,7 @@ class NotificationPage{
         await this.New_In_App_Notification.check()
         await this.New_Push_Notification.check()
         await this.New_Email_Notification.check()
-         await this.New_email_Text.fill(notificationData.emailText)
+        await this.New_email_Text.fill(notificationData.emailText)
         await this.New_email_Subject.fill(notificationData.emailSubject)
         
         await this.New_Title.fill(notificationData.title)
@@ -154,7 +154,7 @@ class NotificationPage{
 
    await this.Notification_Management_Tab.click()
    await this.Drafts.click()
- //  await this.page.waitForTimeout(3000);
+
 if(await this.Drafts_text.isVisible()){
    await this.Delete_Draft_Notification()
 }
@@ -177,6 +177,8 @@ if(await this.Upcoming_text.isVisible()){
       expect(UpcomingText).toBe(notificationData.campaignName)    
       await this.Upcoming_Delete.click()
       await this.Upcoming_Delete_Conform_Yes.click()
+      await this.Notification_Management_Tab.click()
+
 }
     else
 {

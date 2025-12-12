@@ -31,6 +31,8 @@ test('Verify Create Mobile Notification with Save as Draft ', async ({page})=>{
     await NotificationManagement.To_Create_Uniqe();
     
     await NotificationManagement.CreateMobileNotification_Save_as_Draft()
+    await NotificationManagement.To_Create_Uniqe();
+
 
 
 })
@@ -72,6 +74,8 @@ if (NotificationManagement.Draft_Noti_Campaign_Name !== notificationData.campaig
     console.log("Validation Failed - Values are equal");
     fail();
 }
+  await NotificationManagement.To_Create_Uniqe();
+
 
 })
 test('Verify draft notification added', async ({page})=>{
@@ -91,8 +95,12 @@ test('Verify validate Upcoming screen', async ({page})=>{
   await loginuser.login()
   
   const NotificationManagement = new notificationPage(page)
+
   await NotificationManagement.To_Create_Uniqe();
   await NotificationManagement.To_Create_Uniqe1();
+ 
+
+
   await NotificationManagement.CreateMobileNotification_Publish()
   await NotificationManagement.Conform_Publish_Yes.click(); 
  
