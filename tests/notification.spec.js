@@ -5,7 +5,7 @@ import notificationPage from '../pages/NotificationPage.js';
 import notificationData from '../tests/notificationData.json';
 import { fail } from 'assert';
 
-test('pre Test', async ({ page }) => {
+test('Verify unique name in draft ', async ({ page }) => {
   const loginuser = new LoginPage(page)
     await page.goto(testdata.URL)
     await loginuser.login()
@@ -13,7 +13,7 @@ test('pre Test', async ({ page }) => {
     await NotificationManagement.To_Create_Uniqe();
     
 });
-test('Create Mobile Notification with Mobile Preview', async ({page})=>{
+test('Verify Create Mobile Notification with Mobile Preview', async ({page})=>{
  
   const loginuser = new LoginPage(page)
     await page.goto(testdata.URL)
@@ -22,18 +22,19 @@ test('Create Mobile Notification with Mobile Preview', async ({page})=>{
    await NotificationManagement.CreateMobileNotification_Mobile_Preview()
  
 })
-test('Create Mobile Notification with Save as Draft ', async ({page})=>{
+test('Verify Create Mobile Notification with Save as Draft ', async ({page})=>{
  
   const loginuser = new LoginPage(page)
     await page.goto(testdata.URL)
     await loginuser.login()
     const NotificationManagement = new notificationPage(page)
     await NotificationManagement.To_Create_Uniqe();
+    
     await NotificationManagement.CreateMobileNotification_Save_as_Draft()
 
 
 })
-test('Create Mobile Notification with publish ', async ({page})=>{
+test('Verify Create Mobile Notification with publish ', async ({page})=>{
  
     const loginuser = new LoginPage(page)
     await page.goto(testdata.URL)
@@ -41,13 +42,14 @@ test('Create Mobile Notification with publish ', async ({page})=>{
     const NotificationManagement = new notificationPage(page)
     await NotificationManagement.CreateMobileNotification_Publish()
 })
-test('delete draft notification', async ({page})=>{
+test('Verify delete draft notification', async ({page})=>{
  
     const loginuser = new LoginPage(page)
     await page.goto(testdata.URL)
     await loginuser.login()
     const NotificationManagement = new notificationPage(page)
     await NotificationManagement.To_Create_Uniqe();
+    await NotificationManagement.To_Create_Uniqe1();
     await NotificationManagement.CreateMobileNotification_Save_as_Draft()
     await NotificationManagement.Notification_Management_Tab.click()
     await NotificationManagement.Drafts.click()
@@ -72,7 +74,7 @@ if (NotificationManagement.Draft_Noti_Campaign_Name !== notificationData.campaig
 }
 
 })
-test('verify draft notification added', async ({page})=>{
+test('Verify draft notification added', async ({page})=>{
  
    const loginuser = new LoginPage(page)
    await page.goto(testdata.URL)
@@ -82,3 +84,27 @@ test('verify draft notification added', async ({page})=>{
    NotificationManagement.Delete_Draft_Notification;
 })
 
+test('Verify validate Upcoming screen', async ({page})=>{
+ 
+  const loginuser = new LoginPage(page)
+  await page.goto(testdata.URL)
+  await loginuser.login()
+  
+  const NotificationManagement = new notificationPage(page)
+  await NotificationManagement.To_Create_Uniqe();
+  await NotificationManagement.To_Create_Uniqe1();
+  await NotificationManagement.CreateMobileNotification_Publish()
+  await NotificationManagement.Conform_Publish_Yes.click(); 
+ 
+  await NotificationManagement.Notification_Management_Tab.click()
+ 
+  await NotificationManagement.Upcoming.click();
+  
+  const UpcomingText = await NotificationManagement.Upcoming_Campaign_Name.textContent()
+  expect(UpcomingText).toBe(notificationData.campaignName)  
+  await NotificationManagement.Upcoming_Delete.click()
+  await NotificationManagement.Upcoming_Delete_Conform_Yes.click();
+
+
+
+});

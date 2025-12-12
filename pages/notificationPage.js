@@ -154,7 +154,7 @@ class NotificationPage{
 
    await this.Notification_Management_Tab.click()
    await this.Drafts.click()
-   
+ //  await this.page.waitForTimeout(3000);
 if(await this.Drafts_text.isVisible()){
    await this.Delete_Draft_Notification()
 }
@@ -170,6 +170,7 @@ async To_Create_Uniqe1(){
 
 await this.Notification_Management_Tab.click()
 await this.Upcoming.click()
+await this.page.waitForTimeout(3000);
    
 if(await this.Upcoming_text.isVisible()){
    const UpcomingText = await this.Upcoming_text.textContent()
