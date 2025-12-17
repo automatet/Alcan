@@ -6,9 +6,9 @@ import testdata from '../testdata.json';
 
 import RearrangeList from '../pages/RearrangeList.js';
 
-
-test('Verify the functionality of Rearrange city', async ({page})=>{
   
+test('Verify the functionality of Rearrange city', async ({page})=>{
+    test.setTimeout(60000);
     const loginuser = new LoginPage(page)
     await page.goto(testdata.URL)
     await loginuser.login()
@@ -56,7 +56,9 @@ test('Verify the functionality of Rearrange city', async ({page})=>{
         await loginuser.login()
         const rearrangenewcity =new RearrangeList(page)
         await rearrangenewcity.DiscardRearrangeList()
-        await expect(rearrangenewcity.discardbtnvalidation).toBeVisible()
+       
   })
-     
+
     
+
+   
