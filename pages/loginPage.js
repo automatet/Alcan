@@ -15,13 +15,12 @@ class LoginPage{
 
     async login(){
 
+
         await this.useremail.fill(testdata.email)
         await this.userpasword.fill(testdata.password)
         const captchaText =await this.captchabox.innerText();
         await this.captcha.fill(captchaText.trim())
         await this.loginbtn.click()
-       
-
       
 
     }
