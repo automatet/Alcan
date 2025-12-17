@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import notificationData from '../tests/notificationData.json';
+import notificationData from '../notificationData.json';
 
 class NotificationPage{
 
@@ -8,6 +8,7 @@ class NotificationPage{
         this.page = page;
         this.Home = page.locator("//span[contains(text(),'Homepage')]")
         this.Notification_Management_Tab = page.locator("//span[contains(text(),'Notification Management')]")
+        this.Mobile_notification = page.locator("//div[contains(text(),'Mobile Notifications')]")
         this.Create_New = page.locator("//h4[contains(text(),'Create New')]")
         this.New_Campaign_Name = page.locator("//input[@id='campaignName']")
         this.New_email_Text = page.locator("//*[@id='emailText']")
@@ -140,7 +141,7 @@ class NotificationPage{
         await expect(this.New_Push_Notification).toBeChecked();
         await expect(this.New_Email_Notification).toBeChecked();
         await this.New_Publish.click();
-      // await this.Conform_Publish_Yes.click();
+        await this.Conform_Publish_Yes.click();
       
     }
      async Delete_Draft_Notification(){
@@ -154,6 +155,7 @@ class NotificationPage{
 
    await this.Notification_Management_Tab.click()
    await this.Drafts.click()
+   //await this.page.waitForTimeout(5000);
 
 if(await this.Drafts_text.isVisible()){
    await this.Delete_Draft_Notification()
@@ -170,7 +172,7 @@ async To_Create_Uniqe1(){
 
 await this.Notification_Management_Tab.click()
 await this.Upcoming.click()
-await this.page.waitForTimeout(3000);
+
    
 if(await this.Upcoming_text.isVisible()){
    const UpcomingText = await this.Upcoming_text.textContent()

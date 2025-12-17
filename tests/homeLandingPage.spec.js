@@ -1,15 +1,15 @@
 import {test,expect} from '@playwright/test'
-import LoginPage from '../pages/loginPage.js';
 import testdata from '../testdata.json';
 import landingPage from '../pages/landingPage.js'
 
-test('Home Lnading Page', async ({page})=>{
+test('Home Lnading Page', async ({browser})=>{
 
-    const loginuser = new LoginPage(page)
-    await page.goto(testdata.URL)
 
-    await loginuser.login()
-
+    const context =await browser.newContext({storageState: "loginsessions.json"})
+    const page =await context.newPage()
+    await page.goto(testdata.homeurl)
     const homelandingpage =new landingPage(page)
     await expect(homelandingpage.homebtn).toBeVisible()
+
 })
+
