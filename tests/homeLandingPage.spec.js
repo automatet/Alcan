@@ -1,5 +1,6 @@
 import {test,expect} from '@playwright/test'
 import testdata from '../testdata.json';
+// import { test,expect } from '../loginfixture.js'
 import landingPage from '../pages/landingPage.js'
 
 test('Home Lnading Page', async ({browser})=>{
