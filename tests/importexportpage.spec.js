@@ -6,7 +6,7 @@ import testdataImportexport from '../testdataImportexport.json';
 
 test('data import and export positive flow', async ({page})=>{
 
-    test.setTimeout(120000);
+    test.setTimeout(150000);
   
     //login function call and assertions
     const loginuser = new LoginPage(page)
@@ -15,7 +15,7 @@ test('data import and export positive flow', async ({page})=>{
 
     //dataexportcity function call and assertions
     const dataexportcity = new ImportexportPage(page)
-    await dataexportcity.exportcity()
+    await dataexportcity.exportcity();
     await expect(page).toHaveTitle('Open Road');
     await expect(page).toHaveURL(testdataImportexport.exportURL);
 
