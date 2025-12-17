@@ -1,4 +1,3 @@
-import { expect } from '@playwright/test';
 import Rearrangedata from '../Rearrangedata.json'
 
 class RearrangeList{
@@ -23,6 +22,8 @@ class RearrangeList{
         this.discard = page.locator("//span[normalize-space()='Discard']")
         this.discardyes = page.locator("//span[normalize-space()='Yes']")
         this.discardbtnvalidation = page.locator("//span[normalize-space()='Changes discarded.']")
+        this.discardbtn = page.locator("//span[normalize-space()='Discard']")
+        this.discardbtncancel = page.locator("//span[normalize-space()='Cancel']")
  
         //**************REARRANGE POI ********/
  
@@ -60,6 +61,7 @@ class RearrangeList{
          await this.regionOption(Rearrangedata.Region).click();
          await this.editbtn.click()
          await this.dragcity.dragTo(this.dragtocity)
+         await this.page.waitForTimeout(4000);
          await this.donebtn.click()
          await this.savebtn.click()
          await this.yessbtn.click()
@@ -133,13 +135,14 @@ class RearrangeList{
          await this.regionOption(Rearrangedata.Region).click();
          await this.editbtn.click()
          await this.dragcity.dragTo(this.dragtocity)
+         await this.page.waitForTimeout(4000);
          await this.donebtn.click()
+         await this.page.waitForTimeout(4000);
          await this.discard.click()
          await this.discardyes.click()
 
          }
 
-         
 }
  
 export default RearrangeList;
