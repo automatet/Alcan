@@ -42,11 +42,7 @@ this.upcomingtextpresent = page.locator("//span[contains(text(), 'Total Upcoming
 this.pasttextpresent = page.locator("//span[contains(text(), 'Total Past')]");
 this.cards = page.locator("//div[@class='ant-card-cover']/parent::div");
 this.contestnameonupcoming = page.locator("//h5[@class='ant-typography css-ac2jek']").first()
-
-
-
 }
-
 
 async clickcontentsupport(){
 await this.contentsupport.click();
@@ -56,34 +52,27 @@ async createnew(){
 await this.createnewcontest.click()
 const contestnamejason =`${testdata.ContestName}${Date.now()}`
 await this.contestname.fill(contestnamejason)
-console.log(contestnamejason)
-await this.submission.fill("1")
-await this.startdate.fill("12/22/2025")
-await this.enddate.fill("12/27/2025")
-await this.description.fill("Description")
-await this.termsandcondition.fill("term&conditions")             
-                           
-
-
+await this.submission.fill(testdata.submission)
+await this.startdate.fill(testdata.startdate)
+await this.enddate.fill(testdata.enddate)
+await this.description.fill(testdata.description)
+await this.termsandcondition.fill(testdata.termsandcondition)
 }
 
 async contentpublish(){
 await this.createnew()
-
 await this.mobilepreview.click()
 await this.closepreview.click()
 await this.publish.click()
-await this.upcomingbtn.click()
+await this.upcoming.click()
 const value1 = await this.contestnameonupcoming.textContent()
-console.log(value1);
 await this.view.click()
 await this.viewedit.click()
-await this.description.fill("Descriptionupdate")
+await this.description.fill((testdata.description)+"update1")
 await this.updatecontent.click()
 await this.deleteButtons.click()
 await this.confirmdelete.click()
 }
-
 
 async contentdrafts(){
 await this.createnew()
@@ -91,7 +80,7 @@ await this.saveasdraft.click()
 await this.drafts.click()
 await this.view.click()
 await this.viewedit.click()
-await this.description.fill("Description45update1")
+await this.description.fill((testdata.description)+"update2")
 await this.updatecontent.click()
 await this.deleteButtons.click()
 await this.confirmdelete.click()
@@ -103,7 +92,7 @@ await this.contentsupport.click()
 await this.activetab.click()
 await this.view.click()
 await this.viewedit.click()
-await this.description.fill("Description45update1")
+await this.description.fill(((testdata.description)+"update3"))
 await this.updatecontent.click()
 await this.deleteButtons.click()
 await this.confirmdelete.click()

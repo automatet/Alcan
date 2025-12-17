@@ -1,4 +1,19 @@
 {
     "ContestName" : "tst_",
-    "Description": "Testadded"
+    "Description": "Testadded",
+    "submission" : "1",
+    "startdate" : "12/22/2025",
+    "enddate" : "12/27/2025",
+    "description" : "Description",
+    "termsandcondition" : "term&conditions",
+    "blankname" : "Please enter contest name!",
+    "blankdescription" : "Please enter contest description!",
+    "blanknoofsubmission" : "Please enter number of submission!",
+    "blanktermsandconditions" : "Please enter terms!",
+    "contesttextpresent" : "Start a new contest",
+    "draftstextpresent" : "Total Drafts",
+    "activetextpresent" : "Total Active",
+    "upcomingtextpresent" : "Total Upcoming",
+    "pasttextpresent" : "Total Past"
+   
 }
