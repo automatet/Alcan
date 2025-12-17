@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 import LoginPage from '../pages/loginPage.js';
 import testdata from '../testdata.json';
-import notificationPage from '../pages/NotificationPage.js';
+import notificationPage from '../pages/notificationPage.js';
 import notificationData from '../tests/notificationData.json';
 import { fail } from 'assert';
 
