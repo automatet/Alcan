@@ -32,7 +32,7 @@ test('Verify Create Mobile Notification with Save as Draft ', async ({page})=>{
     await NotificationManagement.To_Create_Uniqe();
     
     await NotificationManagement.CreateMobileNotification_Save_as_Draft()
-    await NotificationManagement.To_Create_Uniqe();
+   
 
 
 
@@ -65,7 +65,8 @@ test('Verify validate Upcoming screen and create upcoming', async ({page})=>{
   await loginuser.login()
   
   const NotificationManagement = new notificationPage(page)
-  await NotificationManagement.CreateMobileNotification_Publish_Random()
+ 
+   await NotificationManagement.CreateMobileNotification_Publish_Random()
 
 });
 test('Verify delete draft notification', async ({page})=>{
@@ -74,12 +75,10 @@ test('Verify delete draft notification', async ({page})=>{
     await page.goto(testdata.URL)
     await loginuser.login()
     const NotificationManagement = new notificationPage(page)
-    await page.waitForTimeout(5000);
+  
     await NotificationManagement.To_Create_Uniqe1();
-    await page.waitForTimeout(5000);
-
     await NotificationManagement.To_Create_Uniqe();
-    await page.waitForTimeout(5000);
+    
    
   /*  await NotificationManagement.CreateMobileNotification_Save_as_Draft()
     await NotificationManagement.Notification_Management_Tab.click()
