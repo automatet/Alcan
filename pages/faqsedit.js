@@ -22,7 +22,7 @@ class faqsedit{
         this.FAQs_Valid = page.locator("//span[contains(text(),'FAQ updated successfully!')]")
     }
  async editfaq(){
-      await this.FAQs_taballure.click();
+      await this.FAQs_tab.click()
       await this.FAQs_Edit_Ext_tile.click();
       await this.FAQs_View.click();
       await this.FAQs_View_Edit.click();
