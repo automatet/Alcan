@@ -144,6 +144,31 @@ class NotificationPage{
         await this.Conform_Publish_Yes.click();
       
     }
+     async CreateMobileNotification_Publish_Random(){
+
+        await this.Notification_Management_Tab.click()
+        await this.Create_New.click()
+        const random = Math.floor(Math.random() * 1000);
+        await this.New_Campaign_Name.fill(notificationData.campaignName+random)      
+        await this.New_Campaign_Duration_Start_Date.fill(notificationData.StartDateTime);
+        await this.New_Campaign_Duration_End_Date.fill(notificationData.EndDateTime);
+
+        await this.New_In_App_Notification.check()
+        await this.New_Push_Notification.check()
+        await this.New_Email_Notification.check()
+        await this.New_email_Text.fill(notificationData.emailText)
+        await this.New_email_Subject.fill(notificationData.emailSubject)
+        
+        await this.New_Title.fill(notificationData.title)
+        await this.New_Subtitle.fill(notificationData.subTitle)
+        await this.New_Description.fill(notificationData.description)       
+        await expect(this.New_In_App_Notification).toBeChecked();
+        await expect(this.New_Push_Notification).toBeChecked();
+        await expect(this.New_Email_Notification).toBeChecked();
+        await this.New_Publish.click();
+        await this.Conform_Publish_Yes.click();
+      
+    }
      async Delete_Draft_Notification(){
 
       const draftText = await this.Drafts_text.textContent()
