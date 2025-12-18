@@ -32,7 +32,7 @@ test('Verify Create Mobile Notification with Save as Draft ', async ({page})=>{
     await NotificationManagement.To_Create_Uniqe();
     
     await NotificationManagement.CreateMobileNotification_Save_as_Draft()
-    await NotificationManagement.To_Create_Uniqe();
+   
 
 
 
@@ -58,32 +58,15 @@ test('Verify draft notification added', async ({page})=>{
    NotificationManagement.Delete_Draft_Notification;
 })
 
-test('Verify validate Upcoming screen', async ({page})=>{
+test('Verify validate Upcoming screen and create upcoming', async ({page})=>{
  
   const loginuser = new LoginPage(page)
   await page.goto(testdata.URL)
   await loginuser.login()
   
   const NotificationManagement = new notificationPage(page)
-
-  await NotificationManagement.To_Create_Uniqe();
-  await NotificationManagement.To_Create_Uniqe1();
  
-
-
-  await NotificationManagement.CreateMobileNotification_Publish()
- // await NotificationManagement.Conform_Publish_Yes.click(); 
- 
-  await NotificationManagement.Notification_Management_Tab.click()
- await NotificationManagement.Mobile_notification.click();
-  await NotificationManagement.Upcoming.click();
-  
-  const UpcomingText = await NotificationManagement.Upcoming_Campaign_Name.textContent()
-  expect(UpcomingText).toBe(notificationData.campaignName)  
-  await NotificationManagement.Upcoming_Delete.click()
-  await NotificationManagement.Upcoming_Delete_Conform_Yes.click();
-
-
+   await NotificationManagement.CreateMobileNotification_Publish_Random()
 
 });
 test('Verify delete draft notification', async ({page})=>{
@@ -92,12 +75,10 @@ test('Verify delete draft notification', async ({page})=>{
     await page.goto(testdata.URL)
     await loginuser.login()
     const NotificationManagement = new notificationPage(page)
-    await page.waitForTimeout(5000);
+  
     await NotificationManagement.To_Create_Uniqe1();
-    await page.waitForTimeout(5000);
-
     await NotificationManagement.To_Create_Uniqe();
-    await page.waitForTimeout(5000);
+    
    
   /*  await NotificationManagement.CreateMobileNotification_Save_as_Draft()
     await NotificationManagement.Notification_Management_Tab.click()

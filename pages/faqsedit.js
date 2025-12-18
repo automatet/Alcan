@@ -9,7 +9,8 @@ class faqsedit{
         this.FAQs_tab = page.locator('//span[text()="FAQs"]/parent::span');
         this.FAQs_ext = page.locator("//span[contains(text(),'List of Existing FAQs')]")
         this.FAQs_ext_header=page.locator("//h4[contains(text(),'Existing FAQ')]")
-        this.FAQs_View=page.locator("//span[contains(text(),'View')]")
+        //this.FAQs_View=page.locator("//span[contains(text(),'View')]")
+        this.FAQs_View=page.locator("//div[@class='ant-layout css-ac2jek']//div//div[1]//div[1]//div[1]//div[1]//div[2]//div[1]//div[2]//button[1]//span[2]")
         this.FAQs_View_Edit=page.locator("//span[contains(text(),'Edit')]")
         this.FAQs_Edit_question=page.locator("//input[@placeholder='Enter question']")
         this.FAQs_Edit_Validation=page.getByText("//div[contains(text(),'Please enter question')]")
@@ -28,7 +29,7 @@ class faqsedit{
       await this.FAQs_Edit_question.fill("");
       await this.FAQs_Edit_answer.fill(" ");
       await this.FAQs_Edit_Submit.click();
-      
+
  }
      async faqspageedit(){
       await this.FAQs_Edit_question.fill("Add text")
