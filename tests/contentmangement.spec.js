@@ -1,8 +1,10 @@
 import {test, expect} from '@playwright/test';
 import LoginPage from '../pages/loginPage.js';
 import testdata from '../testdata.json';
+import testdatacontestsupport from '../testdatacontestsupport.json';
 import Content from '../pages/publishcontentmanagement.js';
 
+test.describe.configure({ mode: 'serial' })
 
 test('To click on Create New Contest, Publish and click Upcoming tab', async ({page})=>{
   
@@ -61,15 +63,14 @@ test('To check error messgaes and button visibility on Create New Contest Page',
     await loginuser.login()
     const content = new Content(page)
     await content.assertions()
-    await expect(content.blankname).toHaveText('Please enter contest name!')
-    await expect(content.blankdescription).toHaveText('Please enter contest description!')
-    await expect(content.blanknoofsubmission).toHaveText('Please enter number of submission!')
-    await expect(content.blanktermsandconditions).toHaveText('Please enter terms!')
+    await expect(content.blankname).toHaveText(testdatacontestsupport.blankname)
+    await expect(content.blankdescription).toHaveText(testdatacontestsupport.blankdescription)
+    await expect(content.blanknoofsubmission).toHaveText(testdatacontestsupport.blanknoofsubmission)
+    await expect(content.blanktermsandconditions).toHaveText(testdatacontestsupport.blanktermsandconditions)
     await expect(content.mobilepreview).toBeVisible();
     await expect(content.saveasdraft).toBeVisible();
     await expect(content.publish).toBeVisible();
-    console.log("Test passed")
-      
+        
         
 }
 )
@@ -81,12 +82,11 @@ test('To verify text present on all the five tabs on Create and View Status For 
     await loginuser.login()
     const content = new Content(page)
     await content.homeassertions()
-    await expect(content.contesttextpresent).toHaveText('Start a new contest')
-    await expect(content.draftstextpresent).toContainText('Total Drafts')
-    await expect(content.activetextpresent).toContainText('Total Active')
-    await expect(content.upcomingtextpresent).toContainText('Total Upcoming')
-    await expect(content.pasttextpresent).toContainText('Total Past')
-    console.log("Test passed")
-      
+    await expect(content.contesttextpresent).toHaveText(testdatacontestsupport.contesttextpresent)
+    await expect(content.draftstextpresent).toContainText(testdatacontestsupport.draftstextpresent)
+    await expect(content.activetextpresent).toContainText(testdatacontestsupport.activetextpresent)
+    await expect(content.upcomingtextpresent).toContainText(testdatacontestsupport.upcomingtextpresent)
+    await expect(content.pasttextpresent).toContainText(testdatacontestsupport.pasttextpresent)
+        
         
 })

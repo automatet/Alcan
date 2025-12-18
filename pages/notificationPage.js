@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import notificationData from '../tests/notificationData.json';
+import notificationData from '../notificationData.json';
 
 class NotificationPage{
 
@@ -8,6 +8,7 @@ class NotificationPage{
         this.page = page;
         this.Home = page.locator("//span[contains(text(),'Homepage')]")
         this.Notification_Management_Tab = page.locator("//span[contains(text(),'Notification Management')]")
+        this.Mobile_notification = page.locator("//div[contains(text(),'Mobile Notifications')]")
         this.Create_New = page.locator("//h4[contains(text(),'Create New')]")
         this.New_Campaign_Name = page.locator("//input[@id='campaignName']")
         this.New_email_Text = page.locator("//*[@id='emailText']")
@@ -23,8 +24,8 @@ class NotificationPage{
         this.New_Mobile_Preview = page.locator("//span[contains(text(),'Mobile Preview')]")
         this.New_Save_as_Draft = page.locator("//span[contains(text(),'Save as Draft')]")
         this.New_Publish = page.locator("//span[contains(text(),'Publish')]")
-       this.New_Mobile_Preview_Campaign_Name = page.locator(`//div[contains(text(),"${notificationData.campaignName}")]`)
-       this.New_Mobile_Preview_Description = page.locator(`//div[@class='description-preview']/p[contains(text(),"${notificationData.description}")]`)
+        this.New_Mobile_Preview_Campaign_Name = page.locator(`//div[contains(text(),"${notificationData.campaignName}")]`)
+        this.New_Mobile_Preview_Description = page.locator(`//div[@class='description-preview']/p[contains(text(),"${notificationData.description}")]`)
         
         this.Drafts = page.locator("//h4[contains(text(),'Drafts')]")
         this.Drafts_text= page.locator(`//h5[contains(text(),"${notificationData.campaignName}")]`)
@@ -106,7 +107,7 @@ class NotificationPage{
         await this.New_In_App_Notification.check()
         await this.New_Push_Notification.check()
         await this.New_Email_Notification.check()
-         await this.New_email_Text.fill(notificationData.emailText)
+        await this.New_email_Text.fill(notificationData.emailText)
         await this.New_email_Subject.fill(notificationData.emailSubject)
         
         await this.New_Title.fill(notificationData.title)
@@ -130,7 +131,7 @@ class NotificationPage{
         await this.New_In_App_Notification.check()
         await this.New_Push_Notification.check()
         await this.New_Email_Notification.check()
-         await this.New_email_Text.fill(notificationData.emailText)
+        await this.New_email_Text.fill(notificationData.emailText)
         await this.New_email_Subject.fill(notificationData.emailSubject)
         
         await this.New_Title.fill(notificationData.title)
@@ -140,7 +141,7 @@ class NotificationPage{
         await expect(this.New_Push_Notification).toBeChecked();
         await expect(this.New_Email_Notification).toBeChecked();
         await this.New_Publish.click();
-      // await this.Conform_Publish_Yes.click();
+        await this.Conform_Publish_Yes.click();
       
     }
      async Delete_Draft_Notification(){
@@ -154,7 +155,8 @@ class NotificationPage{
 
    await this.Notification_Management_Tab.click()
    await this.Drafts.click()
-   
+   //await this.page.waitForTimeout(5000);
+
 if(await this.Drafts_text.isVisible()){
    await this.Delete_Draft_Notification()
 }
@@ -170,12 +172,15 @@ async To_Create_Uniqe1(){
 
 await this.Notification_Management_Tab.click()
 await this.Upcoming.click()
+
    
 if(await this.Upcoming_text.isVisible()){
    const UpcomingText = await this.Upcoming_text.textContent()
       expect(UpcomingText).toBe(notificationData.campaignName)    
       await this.Upcoming_Delete.click()
       await this.Upcoming_Delete_Conform_Yes.click()
+      await this.Notification_Management_Tab.click()
+
 }
     else
 {
