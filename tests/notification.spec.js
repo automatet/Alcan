@@ -65,7 +65,8 @@ test('Verify validate Upcoming screen and create upcoming', async ({page})=>{
   await loginuser.login()
   
   const NotificationManagement = new notificationPage(page)
-  await NotificationManagement.CreateMobileNotification_Publish_Random()
+ 
+   await NotificationManagement.CreateMobileNotification_Publish_Random()
 
 });
 test('Verify delete draft notification', async ({page})=>{
