@@ -4,8 +4,6 @@ import testdata from '../testdata.json';
 import testdatacontestsupport from '../testdatacontestsupport.json';
 import Content from '../pages/publishcontentmanagement.js';
 
-test.describe.configure({ mode: 'serial' })
-
 test('To click on Create New Contest, Publish and click Upcoming tab', async ({page})=>{
   
     const loginuser = new LoginPage(page)

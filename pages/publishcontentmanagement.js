@@ -49,6 +49,7 @@ await this.contentsupport.click();
 
 }
 async createnew(){
+await this.page.waitForLoadState('networkidle')
 await this.createnewcontest.click()
 const contestnamejason =`${testdata.ContestName}${Date.now()}`
 await this.contestname.fill(contestnamejason)
@@ -73,11 +74,19 @@ await this.updatecontent.click()
 await this.deleteButtons.click()
 await this.confirmdelete.click()
 }
+async clickDraftsOrupcoming() {
+  if (await this.drafts.isVisible() && await this.drafts.isEnabled()) {
+    await this.drafts.click();
+    } else {
+    await this.upcoming.click();
+    }
+}
 
 async contentdrafts(){
 await this.createnew()
 await this.saveasdraft.click()
-await this.drafts.click()
+await this.page.waitForLoadState('networkidle')
+await this.clickDraftsOrupcoming()
 await this.view.click()
 await this.viewedit.click()
 await this.description.fill((testdata.description)+"update2")
@@ -86,7 +95,13 @@ await this.deleteButtons.click()
 await this.confirmdelete.click()
 }
 
-
+async clickactivesOrupcoming() {
+  if (await this.activetab.isVisible() && await this.activetab.isEnabled()) {
+    await this.activetab.click();
+} else {
+    await this.upcoming.click();
+}
+}
 async active(){
 await this.contentsupport.click()
 await this.activetab.click()
