@@ -63,6 +63,7 @@ class RearrangeList{
          await this.dragcity.dragTo(this.dragtocity)
          await this.page.waitForTimeout(4000);
          await this.donebtn.click()
+         await this.page.waitForTimeout(4000);
          await this.savebtn.click()
          await this.yessbtn.click()
          
